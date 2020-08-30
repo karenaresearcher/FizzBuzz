@@ -11,7 +11,7 @@ options(digits = 3)
 
 ```{r load-sas-libraries, echo = F, message = F, warning = F}
 
-saspath <- "/usr/local/SASHome/SASFoundation/9.4/bin/sas_en" # Your SAS path goes here
+saspath <- "C:Users/kglue/Documents/My SAS Files/9.4/sas.exe" # Your SAS path goes here
 sasopts <- "-ls 75"
 knitr::opts_chunk$set(engine.path=list(sas=saspath, saslog=saspath, sashtml=saspath),
                       engine.opts=list(sas=sasopts, saslog=sasopts, sashtml=sasopts), 
@@ -42,9 +42,10 @@ In the R chunk below, write code which will solve this problem.
 ```{r fizzbuzz-solution, echo = T}
 
 # FizzBuzz code goes here
-
-
-
+for (i in 1:30) 
+  ifelse(i %% 15 == 0, print("FizzBuzz"),
+          ifelse(i %% 3 == 0, print("Fizz"),
+              ifelse(i %% 5 == 0, print("Buzz"), print(i))))
 ```
 
 In the sas chunk, write similar code which will solve this problem.
@@ -54,6 +55,30 @@ PROC PRINTTO log="saslog.log" new;
 PROC IML;
 
 /* FizzBuzz code goes here */
+data hw2;
+  do i = 1 to 30;
+  output;
+  end;
+  run;
+
+  data = hw2;
+  if mod(i,15) = 0 then 
+    do;
+      i = "FizzBuzz"
+    end;
+    else if mod(i,5) = 0 then 
+      do;
+        i =  "Buzz"
+      end;
+      else if mod(i,3) = 0 then 
+        do;
+          i =  "Fizz"
+        end;
+          else i = i;
+        print i;
+    run;
+    proc print;
+    run;
 
 QUIT;
 ```
@@ -123,14 +148,15 @@ res <- rep(NA, 4)
 # Store your answer in res: 
 
 # res <- .....
-
+X1List X1Hardcover     X1Pages 
+0.69959    -1.31281    -0.00392 
 
 # ------------------------------------------------------------------------------
 # Do not edit this
 print(res) 
 ```
 
-The regression equation is $\text{Amazon Price} = `r res[1]` + `r res[2]`(\text{List Price}) `r res[3]`(\text{is Hardcover})  `r res[4]`(\text{# Pages})$
+The regression equation is $\text{Amazon Price} = `r res[1]` + `r res[2]`(\text{List Price}) + `r res[3]`(\text{is Hardcover}) +  `r res[4]`(\text{# Pages})$
 
 
 ```{sas}
