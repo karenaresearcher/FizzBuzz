@@ -11,7 +11,7 @@ options(digits = 3)
 
 ```{r load-sas-libraries, echo = F, message = F, warning = F}
 
-saspath <- "C:Users/kglue/Documents/My SAS Files/9.4/sas.exe" # Your SAS path goes here
+saspath <- "C:\Users\kglue\Documents\My SAS Files\9.4" # Your SAS path goes here
 sasopts <- "-ls 75"
 knitr::opts_chunk$set(engine.path=list(sas=saspath, saslog=saspath, sashtml=saspath),
                       engine.opts=list(sas=sasopts, saslog=sasopts, sashtml=sasopts), 
